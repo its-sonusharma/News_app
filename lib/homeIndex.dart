@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeIndex extends StatefulWidget {
   @override
@@ -117,8 +119,8 @@ class _HomeIndexState extends State<HomeIndex> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: 200,
-                          width: 200,
+                          height: 190,
+                          width: 190,
                           child: Card(
                             color: Colors.grey[300],
                             shape: RoundedRectangleBorder(
@@ -140,8 +142,8 @@ class _HomeIndexState extends State<HomeIndex> {
                         ),
                         SizedBox(width: 10),
                         Container(
-                          height: 200,
-                          width: 200,
+                          height: 190,
+                          width: 190,
                           child: Card(
                             color: Colors.grey[300],
                             shape: RoundedRectangleBorder(
@@ -170,8 +172,8 @@ class _HomeIndexState extends State<HomeIndex> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: 200,
-                          width: 200,
+                          height: 190,
+                          width: 190,
                           child: Card(
                             color: Colors.grey[300],
                             shape: RoundedRectangleBorder(
@@ -194,8 +196,8 @@ class _HomeIndexState extends State<HomeIndex> {
                         ),
                         SizedBox(width: 10),
                         Container(
-                          height: 200,
-                          width: 200,
+                          height: 190,
+                          width: 190,
                           child: Card(
                             color: Colors.grey[300],
                             shape: RoundedRectangleBorder(
@@ -242,7 +244,10 @@ class _TechnewsState extends State<Technews> {
         title: Text('Technology News'),
         centerTitle: true,
         backgroundColor: Colors.blueGrey[600],
-      ),
+      ),body: WebView(
+      initialUrl: 'https://www.indiatoday.in/technology',
+      javascriptMode: JavascriptMode.unrestricted,
+    ),
     );
   }
 }
@@ -251,16 +256,23 @@ class Sportsnews extends StatefulWidget {
   @override
   _SportsnewsState createState() => _SportsnewsState();
 }
-
 class _SportsnewsState extends State<Sportsnews> {
   @override
+  void initState(){
+    super.initState();
+    // Enable hybrid composition.
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sports News'),
         centerTitle: true,
         backgroundColor: Colors.blueGrey[600],
-      ),
+      ),body: WebView(
+      initialUrl: 'https://www.indiatoday.in/sports',
+      javascriptMode: JavascriptMode.unrestricted,
+    ),
     );
   }
 }
@@ -278,7 +290,10 @@ class _PoliticalnewsState extends State<Politicalnews> {
         title: Text('Political News'),
         centerTitle: true,
         backgroundColor: Colors.blueGrey[600],
-      ),
+      ),body: WebView(
+      initialUrl: 'https://www.indiatoday.in/elections',
+      javascriptMode: JavascriptMode.unrestricted,
+    ),
     );
   }
 }
@@ -296,6 +311,10 @@ class _IndustrynewsState extends State<Industrynews> {
         title: Text('Industry News'),
         centerTitle: true,
         backgroundColor: Colors.blueGrey[600],
+      ),
+      body: WebView(
+        initialUrl: 'https://www.indiatoday.in/trending-news',
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

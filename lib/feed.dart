@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newz_app/models/newsinfo.dart';
 import 'package:newz_app/services/api_services.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Feed extends StatefulWidget {
   @override
@@ -38,11 +39,18 @@ class _FeedState extends State<Feed> {
                   height: 300,
                   child: Stack(
                     alignment: Alignment.bottomLeft,
-                    children: <Widget>[
-                      Image.network(articles.urlToImage,
-                        width: 500,
-                        height: 300,
-                        fit: BoxFit.cover,
+                    children : < Widget> [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => All_news()),
+                          );
+                        },
+                        child: Image.network( articles.urlToImage,
+                          width: 500,
+                          height: 300,
+                          fit: BoxFit.cover,
+
+                        ),
                       ),
                       Container(
                         color: Colors.black.withOpacity(0.5),
@@ -51,11 +59,11 @@ class _FeedState extends State<Feed> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
-                            Text(articles.title, style: TextStyle(fontSize: 25,
+                            Text(
+                              articles.title, style: TextStyle(fontSize: 25,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,)),
-                            Text(articles.author, style: TextStyle(fontSize: 22,
-                            color: Colors.white)),
+                            color: Colors.white),
+                            ),
                           ],
                         ),
                       )
@@ -68,6 +76,27 @@ class _FeedState extends State<Feed> {
               return Center(child: CircularProgressIndicator());
           }
         ),
+      ),
+    );
+  }
+}
+class All_news extends StatefulWidget {
+  @override
+  _All_newsState createState() => _All_newsState();
+}
+
+class _All_newsState extends State<All_news> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('All News'),
+        centerTitle: true,
+        backgroundColor: Colors.blueGrey[600],
+      ),
+      body: WebView(
+        initialUrl: 'https://www.indiatoday.in/news.html',
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }
