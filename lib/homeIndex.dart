@@ -13,7 +13,7 @@ class _HomeIndexState extends State<HomeIndex> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Index'),
+        title: Text('Dashboard'),
         centerTitle: true,
         backgroundColor:Colors.blueGrey[600],
       ),
